@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BussinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebProgramlamaProje.Controllers
 {
 	public class CommentController : Controller
 	{
-		public IActionResult Index()
+        CommentManager cm = new CommentManager(new EfCommentRepository());
+
+        public IActionResult Index()
 		{
 			return View();
 		}
@@ -12,9 +17,10 @@ namespace WebProgramlamaProje.Controllers
 		{
 			return PartialView();
 		}
-		public PartialViewResult CommentListByBlog()
+		public PartialViewResult CommentListByBlog(int id)
 		{
-			return PartialView();
+			var values = cm.GetList(id);
+			return PartialView(values);
 		}
 	}
 }
