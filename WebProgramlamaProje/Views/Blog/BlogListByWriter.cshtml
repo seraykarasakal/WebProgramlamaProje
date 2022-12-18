@@ -1,0 +1,47 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>Yazarın Blogları </h1>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Blog Başlığı</th>
+        <th>Oluşturulma Tarihi</th>
+        <th>Kategori</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.BlogID</th>
+            <td>@item.BlogTitle</td>
+            <td>@item.BlogCreateDate</td>
+            <td>@item.Category.CategoryName</td>
+            <td>@item.BlogStatus</td>
+            @*<td>
+                @if (item.BlogStatus)
+                {
+                    <span class="badge badge-info">Aktif</span>
+                }
+                else
+                {
+                    <span class="badge badge-secondary">Pasif</span>
+                }
+            </td>
+            *@
+            <td><a href="/Blog/DeleteBlog/@item.BlogID" class="btn btn-inverse-danger">Sil</a></td>
+            <td><a href="/Blog/EditBlog/@item.BlogID" class="btn btn-inverse-success">Düzenle</a></td>
+        </tr>
+    }
+</table>
+@*<a href="/Activity/ActivityAdd/" class="btn btn-info">Yeni Etkinlik Oluştur</a>
+*@
+<a href="/Blog/BlogAdd/" class="btn btn-info">Yeni Blog Oluştur</a>
+
