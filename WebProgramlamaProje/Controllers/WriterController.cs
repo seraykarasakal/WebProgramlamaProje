@@ -1,5 +1,6 @@
 ﻿using BussinessLayer.Concrete;
 using BussinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
@@ -10,33 +11,42 @@ using WebProgramlamaProje.Models;
 namespace WebProgramlamaProje.Controllers
 {
 
-    //[Authorize]
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterRepository());
+        [Authorize]
         public IActionResult Index()
         {
-            var usermail= User.Identity.Name;
+            var usermail = User.Identity.Name;
             ViewBag.v = usermail;
+            Context c = new Context();
+            var writerName = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterName).FirstOrDefault();
+            ViewBag.v2 = writerName;
 
             return View();
         }
-        //public IActionResult WriterProfile()
-        //{
-        //    return View();
-        //}
-        //public IActionResult WriterMail()
-        //{
-        //    return View();
-        //}
+        public IActionResult WriterProfile()
+        {
+            return View();
+        }
+        public IActionResult WriterMail()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
         public IActionResult Test()
         {
             return View();
         }
+
+        [AllowAnonymous]
         public PartialViewResult WriterNavbarPartial()
         {
             return PartialView();
         }
+
+        [AllowAnonymous]
         public PartialViewResult WriterFooterPartial()
         {
             return PartialView();
@@ -55,11 +65,15 @@ namespace WebProgramlamaProje.Controllers
             wm.TUpdate(p);
             return RedirectToAction("Index", "Dashboard");
         }
+
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult WriteAdd()
         {
             return View();
         }
+
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult WriteAdd(AddProfileImage p)
         {

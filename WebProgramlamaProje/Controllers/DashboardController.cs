@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DataAccessLayer.Concrete;
 using BussinessLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WebProgramlamaProje.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         
@@ -15,5 +19,11 @@ namespace WebProgramlamaProje.Controllers
             ViewBag.v3 = c.Categories.Count();
             return View();
         }
+        //public async Task<IActionResult> LogOut()
+        //{
+        //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        //    return RedirectToAction("Login", "Index");
+        //}
+
     }
 }
