@@ -11,7 +11,7 @@
 <body>
 	<section class="main-content-w3layouts-agileits">
 		<div class="container">
-			<h3 class="tittle">	Hakkımızda</h3>
+			<h3 class="tittle" style="color:#3399ff">	Hakkımızda</h3>
 			<div class="row inner-sec">
 				<!--left-->
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
@@ -20,16 +20,15 @@
 						{
 						<div class="blog_info_left_grid">
 							<a href="single.html">
-								<img src="~/CoreBlogTema/web/images/1.jpg" class="img-fluid" alt="">
+								<img src="@item.AboutImage1" class="img-fluid" alt="">
 							</a>
 						</div>
 						<h3>
-							Misyon ve Vizyon
+							Bloggerlar hakkında her şey
 						</h3>
 						
 						<p>@item.AboutDetails1</p>
 						}
-						<a href="single.html" class="btn btn-primary read-m">Read More</a>
 					</div>
 				</div>
 					<aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
@@ -40,10 +39,10 @@
 									<img src="~/CoreBlogTema/web/images/banner1.jpg" class="img-fluid" alt="">
 							</div>
 								@await Html.PartialAsync("~/Views/NewsLetter/SubScribeMail.cshtml")
-							<div class="tech-btm">
+							@*<div class="tech-btm">
 								<h4>Recent Posts</h4>
 									@await Component.InvokeAsync("WriterLastBlog")
-							</div>
+							</div>*@
 						</div>
 					</aside>
 			</div>

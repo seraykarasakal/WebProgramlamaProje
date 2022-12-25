@@ -18,13 +18,13 @@ namespace WebProgramlamaProje.Controllers
         }
 
         [HttpPost]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<IActionResult> Index(Writer p)
         {
             //Context c = new Context();
             //var bilgi = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
-
-            //    List<Claim> claims = new List<Claim>()
+            //if(bilgi != null) {
+            //List<Claim> claims = new List<Claim>()
             //    {
             //    new Claim(ClaimTypes.Name,p.WriterMail)
             //    };
@@ -35,7 +35,7 @@ namespace WebProgramlamaProje.Controllers
             //};
             //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
             //return RedirectToAction("Index", "Dashboard");
-
+            //}
             //return View();
 
 

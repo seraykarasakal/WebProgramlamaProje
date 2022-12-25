@@ -1,0 +1,59 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+
+@{
+    ViewData["Title"] = "BlogListByAdmin";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">TÜM ETKİNLİK LİSTESİ</h4>
+            <p class="card-description">
+                <code>Admin olarak tüm etkinlikleri görüntüleyebilir ve silebilirsin.</code>
+            </p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Etkinlik Başlığı</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Kategori</th>
+                        <th>Durum</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <th>@item.BlogID</th>
+
+                            <td>
+                                <a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle</a>
+                            </td>
+
+
+                            <td>@item.BlogCreateDate</td>
+                            <td>@item.Category.CategoryName</td>
+                            <td>
+                                @if (item.BlogStatus)
+                                {
+                                    <span class="badge badge-info">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-secondary">Pasif</span>
+                                }
+                            </td>
+@*                            <td><a href="/Blog/DeleteBlogAdmin/@item.BlogID" class="btn btn-inverse-danger">Sil</a></td>
+*@                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

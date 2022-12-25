@@ -5,6 +5,42 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle" style="color:#3399ff">Bloglar</h3>
+        <div class="inner-sec">
+            <div class="left-blog-info-w3layouts-agileits text-left">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 card">
+							<a href="/Blog/BlogReadAll/@item.BlogID/">
+								<img src="@item.BlogImage" class="card-img-top img-fluid" alt="" style="background-color:#b3e0ff">
+                            </a>
+                            <div class="card-body">
+                                <ul class="blog-icons my-4">
+                                    <li>
+                                        <i class="fas fa-arrow-circle-down" style="color:#3399ff"></i> @item.Category.CategoryName
+                                    </li>
+                                    <li>
+										<i class="far fa-calendar-alt" style="color:#3399ff"></i> @item.BlogCreateDate
+                                    </li>
+                                </ul>
+                                <h5 class="card-title">
+									<a href="/Blog/BlogReadAll/@item.BlogID/">@item.BlogTitle</a>
+                                </h5>
+								<p class="card-text mb-3">@item.BlogContent.Substring(0, item.BlogContent.Substring(0, 130).LastIndexOf(" "))...</p>
+								<a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-dark read-m">Devamını Oku</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*
 <section class="main-content-w3layouts-agileits">
 	<div class="container">
 		<h3 class="tittle">Blog</h3>
@@ -22,15 +58,17 @@
 							<ul class="blog-icons my-4">
 								<li>
 									<a href="#">
-										<i class="far fa-calendar-alt"></i> @item.BlogCreateDate</a>
+											<i class="far fa-calendar-alt" style="color:firebrick"></i> @item.BlogCreateDate
+										</a>
 								</li>
 								<li class="mx-2">
 									<a href="#">
-										<i class="far fa-comment"></i> 0</a>
+											<i class="far fa-comment" style="color:firebrick"></i> 0
+										</a>
 								</li>
 								<li>
 									<a href="#">
-										<i class="fas fa-eye"></i> @item.Category.CategoryName</a>
+										<i class="fas fa-eye" style="color:firebrick"></i> @item.Category.CategoryName</a>
 								</li>
 
 							</ul>
@@ -38,7 +76,7 @@
 									<a href="/Blog/BlogReadAll/@item.BlogID/">@item.BlogTitle</a>
 							</h5>
 								<p class="card-text mb-3"> </p>  
-						<a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-primary read-m">Devamını Oku</a>
+						<a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-primary read-m" style="background-color:firebrick">Devamını Oku</a>
 						</div>
 					
 					</div>
@@ -50,3 +88,4 @@
 		</div>
 	</div>
 </section>
+*@

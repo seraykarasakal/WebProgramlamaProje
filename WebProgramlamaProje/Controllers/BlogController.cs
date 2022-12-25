@@ -1,11 +1,13 @@
 ﻿using BussinessLayer.Concrete;
 using BussinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
 using System.Drawing.Design;
 
 namespace WebProgramlamaProje.Controllers
@@ -15,7 +17,7 @@ namespace WebProgramlamaProje.Controllers
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
-
+        Context c = new Context();
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
@@ -29,7 +31,11 @@ namespace WebProgramlamaProje.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-            var values =bm.GetListWithCategoryByWriterBm(1);
+            
+            var usermail = User.Identity.Name;
+            var writerID = c.Writers.Where(x => x.WriterMail ==
+            usermail).Select(y => y.WriterID).FirstOrDefault();
+            var values =bm.GetListWithCategoryByWriterBm(writerID);
             return View(values);
         }
         [HttpGet]
@@ -48,13 +54,18 @@ namespace WebProgramlamaProje.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog p)
         {
+
+            
+            var usermail = User.Identity.Name;
+            var writerID = c.Writers.Where(x => x.WriterMail ==
+            usermail).Select(y => y.WriterID).FirstOrDefault();
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(p);
             if (results.IsValid)
             {
                 p.BlogStatus = true;
                 p.BlogCreateDate = "18.12.2022";
-                p.WriterID = 1;
+                p.WriterID = writerID;
                 bm.TAdd(p);
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -112,7 +123,10 @@ namespace WebProgramlamaProje.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
-            p.WriterID = 1;
+            var usermail = User.Identity.Name;
+            var writerID = c.Writers.Where(x => x.WriterMail ==
+            usermail).Select(y => y.WriterID).FirstOrDefault();
+            p.WriterID = writerID;
             p.BlogCreateDate = "18.12.2022";
             bm.TUpdate(p);
             return RedirectToAction("BlogListByWriter");
