@@ -27,7 +27,7 @@
     @Html.ValidationMessageFor(x => x.BlogImage)
     <br />
     @Html.Label("Kategori")
-    @Html.DropDownListFor(x =>x.CategoryID , (List<SelectListItem>)ViewBag.cv , new{@class = "form-control"})
+    @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.cv, new { @class = "form-control" })
     <br />
     <button class="btn btn-info">KAYDET</button>
 

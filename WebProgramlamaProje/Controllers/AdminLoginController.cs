@@ -15,20 +15,20 @@ namespace WebProgramlamaProje.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Index(Writer p)
+        public async Task<IActionResult> Index(Admin p)
         {
             Context c = new Context();
-            var dataValue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
+            var dataValue = c.Admins.FirstOrDefault(x => x.AdminMail == p.AdminMail && x.AdminPassword == p.AdminPassword);
             if (dataValue != null)
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name,p.WriterMail)
+                    new Claim(ClaimTypes.Name,p.AdminMail)
                 };
                 var userIdentitiy = new ClaimsIdentity(claims, "a");
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentitiy);
                 await HttpContext.SignInAsync(principal);
-                return RedirectToAction("BlogListByAdmin", "Blog");
+                return RedirectToAction("Index", "Admin");
             }
             else
             {
