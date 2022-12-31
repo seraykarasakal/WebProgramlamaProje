@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WebProgramlamaProje.Controllers
 {
-    [Authorize]
+    
     public class DashboardController : Controller
     {
         

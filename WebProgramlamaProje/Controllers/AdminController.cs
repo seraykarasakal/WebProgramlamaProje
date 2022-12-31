@@ -6,6 +6,7 @@ namespace WebProgramlamaProje.Controllers
     
     public class AdminController : Controller
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

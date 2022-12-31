@@ -14,6 +14,7 @@ namespace WebProgramlamaProje.Controllers
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterRepository());
+
         [Authorize]
         public IActionResult Index()
         {
